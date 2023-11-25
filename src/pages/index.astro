@@ -1,0 +1,41 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+
+// Use Astro.glob() to fetch all posts, and then sort them by date.
+const posts = (await Astro.glob("./blog/*.md")).sort(
+  (a, b) =>
+    new Date(b.frontmatter.pubDate).valueOf() -
+    new Date(a.frontmatter.pubDate).valueOf()
+);
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      time {
+        margin-right: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h2>林茂春</h2>
+      {
+        posts.map((post) => (
+          
+            <span>
+              <time datetime={post.frontmatter.pubDate}>
+                {post.frontmatter.pubDate}
+              </time>
+              <a href={post.url}>{post.frontmatter.title}</a>
+            </span>
+            <br />
+          
+        ))
+      }
+    </main>
+  </body>
+</html>

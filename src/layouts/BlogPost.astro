@@ -1,0 +1,42 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+
+export interface Props {
+  content: {
+    title: string;
+    description: string;
+    pubDate?: string;
+    updatedDate?: string;
+    heroImage?: string;
+  };
+}
+
+const {
+  content: { title, description, pubDate, updatedDate, heroImage },
+} = Astro.props;
+---
+
+<html lang="zh-CN">
+  <head>
+    <BaseHead title={title} description={description} />
+    <style>
+      time,
+      a {
+        margin-right: 24px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <h1 class="title">{title}</h1>
+      <article>
+        <slot />
+        <hr />
+        {pubDate && <time>{pubDate}</time>}
+        <a href="/">林茂春</a>
+        <a href="/about">需要帮助？</a>
+      </article>
+    </main>
+  </body>
+</html>
