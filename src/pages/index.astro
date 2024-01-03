@@ -6,36 +6,41 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 const posts = (await Astro.glob("./blog/*.md")).sort(
   (a, b) =>
     new Date(b.frontmatter.pubDate).valueOf() -
-    new Date(a.frontmatter.pubDate).valueOf()
+    new Date(a.frontmatter.pubDate).valueOf(),
 );
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
-      time {
-        margin-right: 24px;
+      ul {
+        list-style-type: none;
+        padding: unset;
+      }
+      ul li time {
+        margin-right: 8px;
       }
     </style>
   </head>
   <body>
     <main>
-      <h2>林茂春</h2>
-      {
-        posts.map((post) => (
-          
-            <span>
-              <time datetime={post.frontmatter.pubDate}>
-                {post.frontmatter.pubDate}
-              </time>
-              <a href={post.url}>{post.frontmatter.title}</a>
-            </span>
-            <br />
-          
-        ))
-      }
+      <h2>{SITE_TITLE}</h2>
+      <section>
+        <ul>
+          {
+            posts.map((post) => (
+              <li>
+                <time datetime={post.frontmatter.pubDate}>
+                  {post.frontmatter.pubDate}
+                </time>
+                <a href={post.url}>{post.frontmatter.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
     </main>
   </body>
 </html>

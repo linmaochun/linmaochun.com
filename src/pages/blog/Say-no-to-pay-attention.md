@@ -3,7 +3,6 @@ layout: "../../layouts/BlogPost.astro"
 title: "对“注意看”说不"
 description: "如何应对信息过载"
 pubDate: "2021-08-15"
-heroImage: "/placeholder-hero.jpg"
 ---
 
 
